@@ -74,15 +74,15 @@
 					</v-snackbar>
 
 					<div>
-						<md-dialog :md-active.sync="active">
+						<md-dialog :md-active.sync="active" >
 							<md-dialog-title>{{roomName}}</md-dialog-title>
-							<v-form ref="form" v-model="valid" lazy-validation>
+							<v-form ref="form" v-model="valid" lazy-validation @submit.prevent="">
 								<v-text-field v-model="email" :rules="emailRules" label="Votre Email..."
 								              required></v-text-field>
 							</v-form>
 							<md-dialog-actions>
 								<div v-if="email !== ''" class="button">
-									<v-btn :disabled="!valid" color="green" @click="reserver" dark>
+									<v-btn :disabled="!valid" color="green" @click.prevent="reserver" dark>
 										Réserver
 									</v-btn>
 								</div>

@@ -76,7 +76,7 @@ export default new Vuex.Store( {
 						} )
 						setTimeout( () => {
 							router.push( '/' )
-						}, 2000 )
+						}, 1500 )
 					} else if ( res.data.success === false ) {
 						commit( 'snackbar', {
 							color: "red",
