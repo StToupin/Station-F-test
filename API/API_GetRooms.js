@@ -6,10 +6,16 @@ const empty = require( 'is-empty' );
 const Reservation = require( "../models/Reservation_model" );
 const Rooms = require( '../Rooms' );
 
-
-function SortRooms( req, res ) {
-	let equipement = req.params.equipement.split( ',' );
+function SortRoomsPers( req, res ) {
+	let nb_pers = req.params.nb_pers;
 	return Rooms.rooms.filter( room => {
+		return room.capacity >= nb_pers;
+	} )
+}
+
+function SortRoomsEquip( req, res ) {
+	let equipement = req.params.equipement.split( ',' );
+	return SortRoomsPers( req, res ).filter( room => {
 		let count = 0;
 		let tab = [];
 		room.equipements.forEach( elem => {
@@ -25,8 +31,7 @@ function SortRooms( req, res ) {
 	} )
 }
 
-router.get( '/:date/:time/:equipement?', ( req, res ) => {
-
+router.get( '/:date/:time/:equipement?/:nb_pers', ( req, res ) => {
 	if ( req.params.time !== undefined && req.params.date !== undefined ) {
 		let ListRooms;
 
@@ -35,10 +40,10 @@ router.get( '/:date/:time/:equipement?', ( req, res ) => {
 				return res.json( { success: false, msg: 'Probleme.' } );
 			} else if ( !empty( reservation ) && reservation.name !== null ) {
 
-				if ( req.params.equipement !== undefined ) {
-					ListRooms = SortRooms( req, res );
+				if ( req.params.equipement !== 'undefined' ) {
+					ListRooms = SortRoomsEquip( req, res );
 				} else {
-					ListRooms = Rooms.rooms;
+					ListRooms = SortRoomsPers( req, res );
 				}
 				reservation.forEach( ( value ) => {
 					let filteredRooms = ListRooms.filter( room => {
@@ -48,10 +53,10 @@ router.get( '/:date/:time/:equipement?', ( req, res ) => {
 				} );
 				return res.json( { success: true, rooms: ListRooms } );
 			} else {
-				if ( req.params.equipement !== undefined ) {
-					return res.json( { success: true, rooms: SortRooms( req, res ) } );
+				if ( req.params.equipement !== 'undefined' ) {
+					return res.json( { success: true, rooms: SortRoomsEquip( req, res ) } );
 				} else {
-					return res.json( { success: true, rooms: Rooms.rooms } );
+					return res.json( { success: true, rooms: SortRoomsPers( req, res ) } );
 				}
 			}
 		} )

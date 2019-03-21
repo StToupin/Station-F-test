@@ -23,26 +23,18 @@
 				</v-time-picker>
 			</div>
 		</div>
-		<div>
 			<v-toolbar style="margin-bottom: 20px">
-				<!--<v-toolbar-items>-->
-				<!--<v-container fluid>-->
-				<!--<div>-->
 				<v-checkbox v-model="equipement" label="TV" value="TV" @change="Search"></v-checkbox>
-				<v-checkbox v-model="equipement" label="Retro Projecteur" value="Retro Projecteur"
-				            @change="Search"></v-checkbox>
-				<!--</div>-->
-				<!--<span>Nombres de personnes:</span>-->
-				<!--<select v-model="nb_personne" >-->
-				<!--<option value="10">0-10</option>-->
-				<!--<option value="20">10-20</option>-->
-				<!--<option value="30" >20+</option>-->
-				<!--</select>-->
-				<!--</v-container>-->
-				<!--</v-toolbar-items>-->
+				<v-checkbox v-model="equipement" label="Retro Projecteur" value="Retro Projecteur" @change="Search"></v-checkbox>
+				<div>
+					<span class="nb_pers">Nombres de personnes: </span>
+					<select v-model="nb_personne" @change="Search">
+						<option value="5">5+</option>
+						<option value="10">10+</option>
+						<option value="20">20+</option>
+					</select>
+				</div>
 			</v-toolbar>
-		</div>
-		{{nb_personne}}
 		<div class="home_container">
 			<div class="room_items">
 				<div class="grid">
@@ -56,7 +48,8 @@
 						<div class="card-content">
 							<v-card-title>
 								<div><h1 class="title">{{room.name}}</h1></div>
-								<div style="line-height: 25px"><strong>Capacité:</strong> {{room.capacity}} people</div>
+								<div style="line-height: 25px"><strong>Capacité:</strong> {{room.capacity}} personnes
+								</div>
 								<div v-if="room.equipements == '' ">Aucun équipement disponible</div>
 								<div v-else>
 									<strong>Equipement:</strong>
@@ -131,7 +124,7 @@
 					msg: ""
 				},
 				snackbar: false,
-				nb_personne: ''
+				nb_personne: '5'
 			}
 		},
 		methods: {
@@ -174,7 +167,8 @@
 					this.$store.dispatch( 'GetRooms', {
 						date: this.date,
 						time: this.time,
-						equipement: this.equipement
+						equipement: this.equipement,
+						nb_pers: this.nb_personne
 					} )
 						.then( () => {
 							this.Rooms = this.$store.getters[ 'GetRooms' ];
@@ -302,7 +296,7 @@
 	.v-toolbar .v-input {
 		width: 0px;
 		position: relative;
-		top: 9px;
+		top: 10px;
 		left: 150px;
 	}
 
@@ -324,11 +318,28 @@
 			left: 256px;
 		}
 	}
+
+	select {
+		margin: 3px;
+	}
+
+	.nb_pers {
+		color: #585858;
+		font-size: 16px
+	}
+
 	@media screen and (max-width: 1260px) {
 
 		.v-toolbar {
 			width: 103%;
 			border-radius: 15px;
+		}
+
+		.v-toolbar .v-input {
+			width: 0px;
+			position: relative;
+			top: 9px;
+			left: 40px;
 		}
 
 	}

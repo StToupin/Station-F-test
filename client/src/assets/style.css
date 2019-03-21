@@ -4,7 +4,7 @@ body {
     font-family: 'Roboto', sans-serif;
     overflow-x: hidden;
     background:  url("./images/pexels-photo-1418116.jpeg");
-
+    min-width: 700px;
 }
 
 .container {
