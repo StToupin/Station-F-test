@@ -56,6 +56,7 @@ router.get( '/:date/:time', ( req, res ) => {
 				} );
 				return res.json( { success: true, rooms: ListRooms } );
 			} else {
+
 				if ( equip !== '' && equip !== undefined ) {
 					return res.json( { success: true, rooms: SortRoomsEquip( req, res ) } );
 				} else {

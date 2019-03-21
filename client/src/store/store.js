@@ -33,9 +33,8 @@ export default new Vuex.Store( {
 	},
 	actions: {
 		async Reserver( { commit }, payload ) {
-			return await axios.post( 'https://station-f-test.herokuapp.com/reservation', { payload } )
+			return await axios.post( 'http://localhost:5000/reservation', { payload } )
 				.then( res => {
-					console.log(res)
 					if ( res.data.success === false ) {
 						commit( 'snackbar', {
 							color: "red",
@@ -53,7 +52,7 @@ export default new Vuex.Store( {
 				} )
 		},
 		async GetRooms( { commit }, payload ) {
-			await axios.get( `https://station-f-test.herokuapp.com/api/getrooms/${payload.date}/${payload.time}?equipement=${payload.equipement}&nb_pers=${payload.nb_pers}` )
+			await axios.get( `http://localhost:5000/api/getrooms/${payload.date}/${payload.time}?equipement=${payload.equipement}&nb_pers=${payload.nb_pers}` )
 				.then( res => {
 					if ( res.data.success === true ) {
 						commit( 'GetRooms', {
@@ -68,7 +67,7 @@ export default new Vuex.Store( {
 				} )
 		},
 		async Annuler_Res( { commit }, payload ) {
-			return await axios.post( 'https://station-f-test.herokuapp.com/annuler', { email: payload.email, Id_Res: payload.Id_Res } )
+			return await axios.post( 'http://localhost:5000/annuler', { email: payload.email, Id_Res: payload.Id_Res } )
 				.then( res => {
 					if ( res.data.success === true ) {
 						commit( 'snackbar', {
