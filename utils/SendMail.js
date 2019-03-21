@@ -24,7 +24,6 @@ function SendMail( req, res, info, cb ) {
 
 	transporter.sendMail( mailOption, ( error ) => {
 		if ( error ) {
-			console.log(error)
 			cb( error, error )
 		}
 		else {

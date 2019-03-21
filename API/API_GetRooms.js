@@ -42,7 +42,6 @@ router.get( '/:date/:time', ( req, res ) => {
 			if ( err ) {
 				return res.json( { success: false, msg: 'Probleme.' } );
 			} else if ( !empty( reservation ) && reservation.name !== null ) {
-
 				if ( equip !== '' && equip !== undefined ) {
 					ListRooms = SortRoomsEquip( req, res );
 				} else {
@@ -56,7 +55,6 @@ router.get( '/:date/:time', ( req, res ) => {
 				} );
 				return res.json( { success: true, rooms: ListRooms } );
 			} else {
-
 				if ( equip !== '' && equip !== undefined ) {
 					return res.json( { success: true, rooms: SortRoomsEquip( req, res ) } );
 				} else {

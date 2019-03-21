@@ -35,8 +35,6 @@ router.post( '/', ( req, res ) => {
 				}
 				SendMail( req, res, info, ( err, success ) => {
 					if ( err ) {
-						console.log(err)
-
 						Reservation.findOneAndDelete( { Id_Res: Id_Res } )
 							.then( () => {
 								return res.json( { success: false, msg: err } );
