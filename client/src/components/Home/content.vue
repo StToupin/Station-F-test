@@ -314,13 +314,15 @@
 		.v-toolbar .v-input {
 			width: 0px;
 			position: relative;
-			top: 9px;
+			top: 10px;
 			left: 256px;
 		}
 	}
 
 	select {
 		margin: 3px;
+		color: #585858;
+
 	}
 
 	.nb_pers {
@@ -338,7 +340,7 @@
 		.v-toolbar .v-input {
 			width: 0px;
 			position: relative;
-			top: 9px;
+			top: 10px;
 			left: 40px;
 		}
 
@@ -349,7 +351,7 @@
 		.v-toolbar .v-input {
 			width: 0px;
 			position: relative;
-			top: 9px;
+			top: 10px;
 			left: 25px;
 		}
 
