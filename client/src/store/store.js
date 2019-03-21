@@ -52,35 +52,20 @@ export default new Vuex.Store( {
 				} )
 		},
 		async GetRooms( { commit }, payload ) {
-			if(payload.equipement == ''){
-				await axios.get( `http://localhost:5000/api/getrooms/${payload.date}/${payload.time}/${undefined}/${payload.nb_pers}` )
-					.then( res => {
-						if ( res.data.success === true ) {
-							commit( 'GetRooms', {
-								Rooms: res.data.rooms,
-							} )
-						} else if ( res.data.success === false ) {
-							commit( 'snackbar', {
-								color: "red",
-								msg: res.data.msg
-							} )
-						}
-					} )
-			}else{
-				await axios.get( `http://localhost:5000/api/getrooms/${payload.date}/${payload.time}/${payload.equipement}/${payload.nb_pers}` )
-					.then( res => {
-						if ( res.data.success === true ) {
-							commit( 'GetRooms', {
-								Rooms: res.data.rooms,
-							} )
-						} else if ( res.data.success === false ) {
-							commit( 'snackbar', {
-								color: "red",
-								msg: res.data.msg
-							} )
-						}
-					} )
-			}
+			console.log(payload.date)
+			await axios.get( `http://localhost:5000/api/getrooms/${payload.date}/${payload.time}?equipement=${payload.equipement}&nb_pers=${payload.nb_pers}` )
+				.then( res => {
+					if ( res.data.success === true ) {
+						commit( 'GetRooms', {
+							Rooms: res.data.rooms,
+						} )
+					} else if ( res.data.success === false ) {
+						commit( 'snackbar', {
+							color: "red",
+							msg: res.data.msg
+						} )
+					}
+				} )
 		},
 		async Annuler_Res( { commit }, payload ) {
 			return await axios.post( 'http://localhost:5000/annuler', { email: payload.email, Id_Res: payload.Id_Res } )
