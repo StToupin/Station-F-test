@@ -35,9 +35,10 @@ router.post( '/', ( req, res ) => {
 				}
 				SendMail( req, res, info, ( err, success ) => {
 					if ( err ) {
+						console.log(err)
 						Reservation.findOneAndDelete( { Id_Res: Id_Res } )
 							.then( () => {
-								return res.json( { success: false, msg: 'Veuillez rentrer un email valide2' } );
+								return res.json( { success: false, msg: err } );
 							} )
 					} else if ( success ) {
 						fs.readFile( "Reservation.json", function ( err, data ) {

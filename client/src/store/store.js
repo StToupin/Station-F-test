@@ -35,6 +35,7 @@ export default new Vuex.Store( {
 		async Reserver( { commit }, payload ) {
 			return await axios.post( 'https://station-f-test.herokuapp.com/reservation', { payload } )
 				.then( res => {
+					console.log(res)
 					if ( res.data.success === false ) {
 						commit( 'snackbar', {
 							color: "red",
