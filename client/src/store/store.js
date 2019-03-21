@@ -52,7 +52,6 @@ export default new Vuex.Store( {
 				} )
 		},
 		async GetRooms( { commit }, payload ) {
-			console.log(payload.date)
 			await axios.get( `http://localhost:5000/api/getrooms/${payload.date}/${payload.time}?equipement=${payload.equipement}&nb_pers=${payload.nb_pers}` )
 				.then( res => {
 					if ( res.data.success === true ) {
