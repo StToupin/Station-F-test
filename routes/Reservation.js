@@ -11,7 +11,7 @@ const SendMail = require( '../utils/SendMail' )
 router.post( '/', ( req, res ) => {
 
 	if ( req.body.payload.email === undefined ) {
-		return res.json( { success: false, msg: 'Veulliez rentrer un email valide' } );
+		return res.json( { success: false, msg: 'Veuillez rentrer un email valide1' } );
 	} else {
 		let Id_Res = uniqid();
 		let newRes = new Reservation( {//todo expliquer que je ne fait pas de verification dinjection
@@ -37,7 +37,7 @@ router.post( '/', ( req, res ) => {
 					if ( err ) {
 						Reservation.findOneAndDelete( { Id_Res: Id_Res } )
 							.then( () => {
-								return res.json( { success: false, msg: 'Veulliez rentrer un email valide' } );
+								return res.json( { success: false, msg: 'Veuillez rentrer un email valide2' } );
 							} )
 					} else if ( success ) {
 						fs.readFile( "Reservation.json", function ( err, data ) {
