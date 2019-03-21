@@ -1,7 +1,7 @@
 let nodemailer = require( 'nodemailer' );
 
 function SendMail( req, res, info, cb ) {
-	let time = parseInt( info.time ) + 1
+	let time = parseInt( info.time ) + 1;
 	let transporter = nodemailer.createTransport( {
 		service: 'gmail',
 		secure: false,

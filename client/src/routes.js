@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import store from './store/store';
 
 import Home from './components/Home/content';
 import Annuler_Res from './components/Annuler_Res';

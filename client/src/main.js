@@ -7,7 +7,7 @@ import 'vue-material/dist/vue-material.min.css';
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 
-Vue.use( Vuetify )
+Vue.use( Vuetify );
 Vue.use( MdDialog );
 Vue.use( MdDialogPrompt );
 

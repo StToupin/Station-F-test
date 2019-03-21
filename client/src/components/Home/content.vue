@@ -26,22 +26,23 @@
 		<div>
 			<v-toolbar style="margin-bottom: 20px">
 				<!--<v-toolbar-items>-->
-					<!--<v-container fluid>-->
-					<!--<div>-->
-						<v-checkbox v-model="equipement" label="TV" value="TV" @change="Search"></v-checkbox>
-						<v-checkbox v-model="equipement" label="Retro Projecteur" value="Retro Projecteur" @change="Search"></v-checkbox>
-					<!--</div>-->
-					<!--<span>Nombres de personnes:</span>-->
-					<!--<select v-model="nb_personne" >-->
-						<!--<option value="10">0-10</option>-->
-						<!--<option value="20">10-20</option>-->
-						<!--<option value="30" >20+</option>-->
-					<!--</select>-->
-					<!--</v-container>-->
+				<!--<v-container fluid>-->
+				<!--<div>-->
+				<v-checkbox v-model="equipement" label="TV" value="TV" @change="Search"></v-checkbox>
+				<v-checkbox v-model="equipement" label="Retro Projecteur" value="Retro Projecteur"
+				            @change="Search"></v-checkbox>
+				<!--</div>-->
+				<!--<span>Nombres de personnes:</span>-->
+				<!--<select v-model="nb_personne" >-->
+				<!--<option value="10">0-10</option>-->
+				<!--<option value="20">10-20</option>-->
+				<!--<option value="30" >20+</option>-->
+				<!--</select>-->
+				<!--</v-container>-->
 				<!--</v-toolbar-items>-->
 			</v-toolbar>
 		</div>
-{{nb_personne}}
+		{{nb_personne}}
 		<div class="home_container">
 			<div class="room_items">
 				<div class="grid">
@@ -55,10 +56,10 @@
 						<div class="card-content">
 							<v-card-title>
 								<div><h1 class="title">{{room.name}}</h1></div>
-								<div style="line-height: 25px">Capacité: {{room.capacity}} people</div>
+								<div style="line-height: 25px"><strong>Capacité:</strong> {{room.capacity}} people</div>
 								<div v-if="room.equipements == '' ">Aucun équipement disponible</div>
 								<div v-else>
-									Equipement:
+									<strong>Equipement:</strong>
 									<ul v-for="(equipement, index) in room.equipements" :key="index">
 										<li>{{equipement.name}}</li>
 									</ul>
@@ -130,7 +131,7 @@
 					msg: ""
 				},
 				snackbar: false,
-				nb_personne:''
+				nb_personne: ''
 			}
 		},
 		methods: {
@@ -170,7 +171,11 @@
 			},
 			async Search() {
 				if ( this.date !== undefined ) {
-					this.$store.dispatch( 'GetRooms', { date: this.date, time: this.time, equipement: this.equipement } )
+					this.$store.dispatch( 'GetRooms', {
+						date: this.date,
+						time: this.time,
+						equipement: this.equipement
+					} )
 						.then( () => {
 							this.Rooms = this.$store.getters[ 'GetRooms' ];
 						} )
@@ -206,13 +211,6 @@
 		grid-template-columns: 50% 50%;
 	}
 
-	@media screen and (min-width: 1905px) {
-		.grid {
-			display: grid;
-			grid-template-columns: 33% 33% 33%;
-		}
-	}
-
 	.room_items {
 		display: flex;
 		flex-wrap: wrap;
@@ -223,7 +221,7 @@
 		margin: 0 0 30px 30px;
 		height: 97%;
 		/*background: linear-gradient(#6C1E1E, #340101);*/
-		border-radius: 4px;
+		border-radius: 10px;
 		box-shadow: 10px 5px 10px #202020;
 	}
 
@@ -231,6 +229,8 @@
 		margin: 0 20px 20px 20px;
 		display: grid;
 		grid-template-rows: 30% 30%;
+		font-size: 17px;
+		line-height: 24px;
 	}
 
 	.v-card__actions {
@@ -258,6 +258,7 @@
 
 	h1 {
 		padding: 20px 0 20px 0;
+		font-size: 26px !important;
 	}
 
 	.time-picker {
@@ -288,7 +289,59 @@
 	.button {
 		margin-right: 20px;
 	}
-	.v-toolbar__content{
+
+	.v-toolbar {
+		width: 97%;
+		border-radius: 15px;
+	}
+
+	.v-toolbar__content {
 		float: right;
 	}
+
+	.v-toolbar .v-input {
+		width: 0px;
+		position: relative;
+		top: 9px;
+		left: 150px;
+	}
+
+	@media screen and (min-width: 1905px) {
+		.grid {
+			display: grid;
+			grid-template-columns: 33% 33% 33%;
+		}
+
+		.v-toolbar {
+			width: 93%;
+			border-radius: 15px;
+		}
+
+		.v-toolbar .v-input {
+			width: 0px;
+			position: relative;
+			top: 9px;
+			left: 256px;
+		}
+	}
+	@media screen and (max-width: 1260px) {
+
+		.v-toolbar {
+			width: 103%;
+			border-radius: 15px;
+		}
+
+	}
+
+	@media screen and (max-width: 770px) {
+
+		.v-toolbar .v-input {
+			width: 0px;
+			position: relative;
+			top: 9px;
+			left: 25px;
+		}
+
+	}
+
 </style>
